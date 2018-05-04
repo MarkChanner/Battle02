@@ -3,14 +3,14 @@ require 'game'
 describe Game do
   let(:the_beast) { double :the_beast, health: 100 }
   let(:mark) { double :mark, health: 10 }
-  subject(:game) { described_class.new(the_beast, mark) }
+  subject(:game) { described_class.new(mark, the_beast) }
 
   describe '#initialze' do
     it 'initializes player one' do
-      expect(subject.player_one).to eq(the_beast)
+      expect(subject.player_one).to eq(mark)
     end
     it 'initializes player one' do
-      expect(subject.player_two).to eq(mark)
+      expect(subject.player_two).to eq(the_beast)
     end
   end
 
@@ -23,6 +23,7 @@ describe Game do
 
   describe 'turn' do
     it "returns true if player one's turn" do
+      subject.switch_turn
       expect(subject.player_one_turn).to eq true
     end
 
@@ -35,15 +36,6 @@ describe Game do
       subject.attack
       subject.switch_turn
       expect(subject.attacker).to eq mark
-    end
-  end
-
-  describe '#switch_turn' do
-    it 'should make player_one_turn false' do
-      allow(mark).to receive(:reduce_health)
-      subject.attack
-      subject.switch_turn
-      expect(subject.player_one_turn).to eq false
     end
   end
 

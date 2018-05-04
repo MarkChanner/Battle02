@@ -19,6 +19,7 @@ class Battle < Sinatra::Base
 
   get '/play' do
     @game = $game
+    @game.switch_turn
     erb(:play)
   end
 
@@ -28,10 +29,8 @@ class Battle < Sinatra::Base
     if @game.defender.health == 0
       redirect '/result'
     else
-      @game.switch_turn
       erb(:attack)
     end
-
   end
 
   get '/result' do

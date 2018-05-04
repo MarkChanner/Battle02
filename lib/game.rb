@@ -5,7 +5,7 @@ class Game
   def initialize(player_one, player_two)
     @player_one = player_one
     @player_two = player_two
-    @player_one_turn = true
+    @player_one_turn = false
   end
 
   def attack
