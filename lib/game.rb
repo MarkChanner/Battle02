@@ -10,6 +10,9 @@ class Game
 
   def attack
     @player_one_turn ? @player_two.reduce_health : @player_one.reduce_health
+  end
+
+  def switch_turn
     @player_one_turn = !@player_one_turn
   end
 

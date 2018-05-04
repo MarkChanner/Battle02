@@ -25,11 +25,13 @@ class Battle < Sinatra::Base
   get '/attack' do
     @game = $game
     @game.attack
-    if @game.attacker.health == 0 # to be refactored!!!
+    if @game.defender.health == 0
       redirect '/result'
     else
+      @game.switch_turn
       erb(:attack)
     end
+
   end
 
   get '/result' do

@@ -26,12 +26,6 @@ describe Game do
       expect(subject.player_one_turn).to eq true
     end
 
-    it "returns false if not player one's turn" do
-      allow(mark).to receive(:reduce_health)
-      subject.attack
-      expect(subject.player_one_turn).to eq false
-    end
-
     it "returns player one if player one's turn" do
       expect(subject.attacker).to eq the_beast
     end
@@ -39,7 +33,17 @@ describe Game do
     it "returns player two if player two's turn" do
       allow(mark).to receive(:reduce_health)
       subject.attack
+      subject.switch_turn
       expect(subject.attacker).to eq mark
+    end
+  end
+
+  describe '#switch_turn' do
+    it 'should make player_one_turn false' do
+      allow(mark).to receive(:reduce_health)
+      subject.attack
+      subject.switch_turn
+      expect(subject.player_one_turn).to eq false
     end
   end
 
