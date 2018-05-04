@@ -26,11 +26,7 @@ class Battle < Sinatra::Base
   get '/attack' do
     @game = $game
     @game.attack
-    if @game.defender.health == 0
-      redirect '/result'
-    else
-      erb(:attack)
-    end
+    @game.defender.health == 0 ? (redirect '/result') : erb(:attack)
   end
 
   get '/result' do
