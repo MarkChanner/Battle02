@@ -1,5 +1,6 @@
 class Game
 
+  @@game = nil
   attr_reader :player_one, :player_two, :player_one_turn
 
   def initialize(player_one, player_two)
@@ -22,6 +23,13 @@ class Game
 
   def defender
     @player_one_turn? @player_two : @player_one
+  end
+
+  def self.instance(player_one = nil, player_two = nil)
+    if @@game == nil
+      @@game = Game.new(player_one, player_two)
+    end
+    @@game
   end
 
 end
