@@ -25,7 +25,15 @@ class Battle < Sinatra::Base
   get '/attack' do
     @game = $game
     @game.attack
-    erb(:attack)
+    if @game.attacker.health == 0 # to be refactored!!!
+      redirect '/result'
+    else
+      erb(:attack)
+    end
+  end
+
+  get '/result' do
+    erb(:result)
   end
 
   # start the server if ruby file executed directly
